@@ -7,26 +7,33 @@ public enum MapName{
 }
 public class MapManager : Singleton<MapManager> {
 	[SerializeField] private SpawnPool pool;
-//	[SerializeField] private Queue<GameObject> maps = new Queue<GameObject>();
-	[SerializeField] private Vector3 positonStartSpawnNext = new Vector3(0,-1.2f,0);
+	 private Queue<GameObject> maps = new Queue<GameObject>();
+	[SerializeField] private Vector3 startPositionSpawnNext = new Vector3(0,-1.2f,0);
 
 	[SerializeField] private Transform player;
 	[SerializeField] private float spawnDistacne = 100f;
 
+	[SerializeField] private Transform lastMap ;
+	[SerializeField] private Vector3 endPositionLastMap;
+	[SerializeField] private float distanceDestroyMap = 20f;
 
 	void Start(){
 		Spawn ();
+		CaculatoLastMapNew();
 	}
 
 	void Update(){
 		if (IsPlayerNearMapEnd()) {
 			Spawn ();
 		}
+		if (IsPlayerPassedLastMap ()) {
+			DestroyMap ();
+		}
 	}
 
 	private bool IsPlayerNearMapEnd()
 	{
-		float distance = positonStartSpawnNext.z - player.position.z;
+		float distance = startPositionSpawnNext.z - player.position.z;
 		if (distance <= spawnDistacne)
 			return true;
 		return false;
@@ -35,13 +42,35 @@ public class MapManager : Singleton<MapManager> {
 	void Spawn(){
 		GameObject map = pool.GetFromPool (GetMapNameSpawn(), Vector3.zero, Quaternion.identity);
 		float mapLenght = map.GetComponent<Map> ().Lenght;
-		Vector3 positionSpawn = GetPositionFromMapPositionStart(positonStartSpawnNext,mapLenght);
+		Vector3 positionSpawn = GetPositionFromMapPositionStart(startPositionSpawnNext,mapLenght);
 		map.transform.position = positionSpawn;
-		positonStartSpawnNext.z += mapLenght;
+		startPositionSpawnNext.z += mapLenght;
+		maps.Enqueue (map);
 	}
 
-	void DestroyMap(GameObject map){
-		pool.ReleaseToPool (map);
+	void DestroyMap(){
+		pool.ReleaseToPool (lastMap.gameObject);
+		CaculatoLastMapNew ();
+	}
+
+	void CaculatoLastMapNew(){
+		lastMap = maps.Dequeue ().transform;
+		endPositionLastMap = GetEndPositionLastMap ();
+	}
+
+	bool IsPlayerPassedLastMap(){
+		if (player.position.z - endPositionLastMap.z >= distanceDestroyMap) {
+			return true;
+		}
+		return false;
+	}
+
+	Vector3 GetEndPositionLastMap(){
+		Vector3 endPosition;
+		float mapLenght = lastMap.GetComponent<Map> ().Lenght;
+		endPosition = lastMap.position;
+		endPosition.z += mapLenght / 2 ;
+		return endPosition;
 	}
 		
 	string GetMapNameSpawn(){
