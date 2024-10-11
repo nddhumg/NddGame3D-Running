@@ -19,8 +19,8 @@ using UnityEngine;
 	[SerializeField] protected Transform waiter;
 	[SerializeField] protected Transform holder;
 
-	protected override void Start(){
-		base.Start ();
+	protected override void Awake(){
+		base.Awake ();
 
 		poolDictionary = new Dictionary<string , Queue<GameObject>> ();
 

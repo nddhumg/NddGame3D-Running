@@ -3,59 +3,111 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using Pc;
-
 public class PlayerController : MonoBehaviour {
 	[SerializeField] private CharacterController controller;
-	[SerializeField] private float height = 2f;
+	[SerializeField] private Animator anim;
 
-	[SerializeField] private float speed = 10f;
+	[SerializeField] private float moveSpeed = 10f;
+	[SerializeField] private float maxSpeed = 30f;
 	[SerializeField] private Vector3 velocity = Vector3.zero;
 
 	[SerializeField] private float gravity = 0.5f;
 	[SerializeField] private bool isGrounded;
 	[SerializeField] private Transform checkGround;
 	[SerializeField] private LayerMask whatIsGround;
-	[SerializeField] private float radiousCheck = 0.2f;
+	[SerializeField] private float radiousCheck = 0.3f;
 
 	[SerializeField] private bool isChangeLane = false;
 	[SerializeField] private float lanePosition;
-	[SerializeField] private float laneChangeSpeed = 10;
 	[SerializeField] private int laneDirection;
 
-	[SerializeField] private float timeRoll = 0.2f;
-	[SerializeField] private float rollHeight = 0.7f;
-	[SerializeField] private bool isRoll = false;
+	private PlayerStateMachine stateMachine;
 
 
+	public float MoveSpeed{
+		get{ 
+			return moveSpeed;
+		}
+		set{ 
+			moveSpeed = value;
+			if (moveSpeed > maxSpeed) {
+				moveSpeed = maxSpeed;
+			}
+		}
+	}
+
+	public float MaxSpeed{
+		get{ 
+			return maxSpeed;
+		}
+	}
+
+	public bool IsGrounded{
+		get{ 
+			return isGrounded;
+		}
+	}
+	void Start(){
+		stateMachine = new PlayerStateMachine (controller, this, anim);
+		stateMachine.Initialize (stateMachine.idleState);
+	}
 
 	void FixedUpdate(){
+		stateMachine.FixedUpdate ();
 		HandleVelocity ();
+		velocity += stateMachine.velocity;
 		HandleAnimation ();
 		controller.Move (velocity);
 	}
 
-	void HandleVelocity(){
-		CheckGrounded ();
+	void Update(){
+		stateMachine.Update ();
 		CheckChangeLane ();
-		Move ();
-		Jumb ();
-		CheckRoll ();
+		CheckGrounded ();
+	}
+
+	void HandleVelocity(){
 		Falling ();
+		Grounded ();
+		ChangeLane ();
+		Move ();
 	}
 
 	void HandleAnimation(){
+//		anim.SetFloat ("VelocityY", velocity.y);
+		if (velocity.y < 0)
+			anim.SetBool ("isFall", true);
+		if(isGrounded) {
+			anim.SetBool ("isFall", false);
+		}
 	}
 
 	void CheckChangeLane(){
-		if (InputManager.instance.left) {
-			ChangeLane (GameController.Swipe.Left);
+		if (TouchSimulation.instance.LeftTouch) {
+			ChangeLaneEnter (GameController.Swipe.Left);
 		}
-		if (InputManager.instance.right) {
-			ChangeLane (GameController.Swipe.Right);
+		else if (TouchSimulation.instance.RightTouch) {
+			ChangeLaneEnter (GameController.Swipe.Right);
 		}
+	}
 
+
+	void CheckGrounded(){
+		isGrounded = Physics.CheckSphere(checkGround.position,radiousCheck,whatIsGround);
+		if (isGrounded && velocity.y < 0) {
+			velocity.y = 0;
+		}
+	}
+
+	void OnDrawGizmosSelected()
+	{
+		Gizmos.color = Color.yellow;
+		Gizmos.DrawSphere(checkGround.position, radiousCheck);
+	}
+
+	void ChangeLane(){
 		if (isChangeLane) {
-			velocity.x = laneDirection * Time.fixedDeltaTime * laneChangeSpeed;
+			velocity.x = laneDirection * Time.fixedDeltaTime * moveSpeed;
 			if (IsFinishChangeLane()) {
 				isChangeLane = false;
 				velocity.x = 0;
@@ -72,7 +124,7 @@ public class PlayerController : MonoBehaviour {
 			return false;
 	}
 
-	void ChangeLane(GameController.Swipe swipe){
+	void ChangeLaneEnter(GameController.Swipe swipe){
 		if (!GameController.instance.CanChange (swipe))
 			return;
 		GameController.instance.ChangeLane (swipe);
@@ -82,39 +134,13 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void Move(){
-		velocity.z = transform.forward.z * speed * Time.fixedDeltaTime;
+		velocity.z = transform.forward.z * moveSpeed * Time.fixedDeltaTime;
 	}
 
-	void Jumb(){
-		if(InputManager.instance.up && isGrounded){
-			velocity.y = 0.2f;
-		}
-	}
-
-	void CheckGrounded(){
-		isGrounded = Physics.CheckSphere(checkGround.position,radiousCheck,whatIsGround);
+	void Grounded(){
 		if (isGrounded && velocity.y < 0) {
 			velocity.y = 0;
 		}
-	}
-
-	void CheckRoll(){
-		if (InputManager.instance.down && !isRoll) {
-			StartCoroutine (Roll ());
-		}
-	}
-
-	IEnumerator Roll(){
-		isRoll = true;
-		if (isGrounded) {
-			controller.height = rollHeight;
-		} else {
-			controller.height = rollHeight;
-			velocity.y = -0.5f	;
-		}
-		yield return new WaitForSeconds (timeRoll);
-		controller.height = height; 
-		isRoll = false;
 	}
 
 	void Falling(){
@@ -122,4 +148,5 @@ public class PlayerController : MonoBehaviour {
 			return;
 		velocity.y -= gravity * Time.fixedDeltaTime;
 	}
+
 }
