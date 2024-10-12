@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameController : Singleton<GameController> {
-	[SerializeField] private PlayerController player;
+	[SerializeField] private Player.PlayerController player;
 	[SerializeField] private float[] lanes;
 	[SerializeField] private int currentLane = 1;
 	[SerializeField] private float score = 0;

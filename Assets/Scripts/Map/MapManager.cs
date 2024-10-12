@@ -42,8 +42,7 @@ public class MapManager : Singleton<MapManager> {
 	void Spawn(){
 		GameObject map = pool.GetFromPool (GetMapNameSpawn(), Vector3.zero, Quaternion.identity);
 		float mapLenght = map.GetComponent<Map> ().Lenght;
-		Vector3 positionSpawn = GetPositionFromMapPositionStart(startPositionSpawnNext,mapLenght);
-		map.transform.position = positionSpawn;
+		map.transform.position = startPositionSpawnNext;
 		startPositionSpawnNext.z += mapLenght;
 		maps.Enqueue (map);
 	}
@@ -69,7 +68,7 @@ public class MapManager : Singleton<MapManager> {
 		Vector3 endPosition;
 		float mapLenght = lastMap.GetComponent<Map> ().Lenght;
 		endPosition = lastMap.position;
-		endPosition.z += mapLenght / 2 ;
+		endPosition.z += mapLenght ;
 		return endPosition;
 	}
 		
@@ -77,11 +76,6 @@ public class MapManager : Singleton<MapManager> {
 		return MapName.Map.ToString ();
 	}
 
-	private Vector3 GetPositionFromMapPositionStart(Vector3 startPosition, float lenght){
-		Vector3 positionMid = startPosition;
-		positionMid.z += lenght/2f;
-		return positionMid;
-	}
 
 }
  

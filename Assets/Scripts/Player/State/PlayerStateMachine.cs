@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace Player{
 public class PlayerStateMachine : StateMachine {
 	public IState rollState;
 	public IState jumpState;
@@ -20,7 +21,7 @@ public class PlayerStateMachine : StateMachine {
 		anim = animator;
 		rollState = new PlayerRollState (this);
 		jumpState = new PlayerJumpState (this);
-		idleState = new PlayerIdleState (this);
+		idleState = new PlayerMoveState (this);
 	}
 
 	public override void Initialize (IState state)
@@ -28,6 +29,5 @@ public class PlayerStateMachine : StateMachine {
 		base.Initialize (state);
 		input = TouchSimulation.instance;
 	}
-
-
+}
 }

@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace Player{
 public class PlayerJumpState : IState {
 	private PlayerStateMachine manager;
+	private string animationParameters = AnimationParameters.isJump.ToString();
 
-	private float countJump = 3f;
+	private float countJump = 2f;
 	private bool isJump;
 
 	private float jumpTime = 0.1f;
@@ -17,7 +19,7 @@ public class PlayerJumpState : IState {
 
 	public virtual void Enter (){
 		isJump = true;
-		manager.anim.SetBool ("isJump",true);
+		manager.anim.SetBool (animationParameters,true);
 		manager.velocity.y = countJump;
 	}
 
@@ -25,7 +27,7 @@ public class PlayerJumpState : IState {
 		isJump = false;
 		timer = 0;
 		manager.velocity.y = 0f;
-		manager.anim.SetBool ("isJump",false);
+		manager.anim.SetBool (animationParameters,false);
 	}
 
 	public virtual void UpdateLogic(){
@@ -48,4 +50,5 @@ public class PlayerJumpState : IState {
 			manager.velocity.y = countJump * Time.fixedDeltaTime;
 		}	
 	}
+}
 }

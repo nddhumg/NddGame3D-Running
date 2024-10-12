@@ -2,7 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using Pc;
+namespace Player{
+public enum AnimationParameters
+{
+	isRoll,
+	isJump,
+	isFall,
+	isMove,
+	speed,
+}
+
 public class PlayerController : MonoBehaviour {
 	[SerializeField] private CharacterController controller;
 	[SerializeField] private Animator anim;
@@ -74,7 +83,6 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void HandleAnimation(){
-//		anim.SetFloat ("VelocityY", velocity.y);
 		if (velocity.y < 0)
 			anim.SetBool ("isFall", true);
 		if(isGrounded) {
@@ -106,15 +114,15 @@ public class PlayerController : MonoBehaviour {
 	}
 
 	void ChangeLane(){
-		if (isChangeLane) {
-			velocity.x = laneDirection * Time.fixedDeltaTime * moveSpeed;
-			if (IsFinishChangeLane()) {
-				isChangeLane = false;
-				velocity.x = 0;
-				laneDirection = 0;
-				return;
-			}
+		if (!isChangeLane)
+			return;
+		velocity.x = laneDirection * Time.fixedDeltaTime * moveSpeed;
+		if (IsFinishChangeLane()) {
+			isChangeLane = false;
+			velocity.x = 0;
+			laneDirection = 0;
 		}
+
 	}
 
 	bool IsFinishChangeLane(){
@@ -149,4 +157,5 @@ public class PlayerController : MonoBehaviour {
 		velocity.y -= gravity * Time.fixedDeltaTime;
 	}
 
+}
 }
