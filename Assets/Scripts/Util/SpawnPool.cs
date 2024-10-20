@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-	public class SpawnPool : NddBehaviour{
+public class SpawnPool : NddBehaviour{
 	[System.Serializable]
 	public class Pool{
 		public string tag;
@@ -21,7 +21,6 @@ using UnityEngine;
 
 	protected override void Awake(){
 		base.Awake ();
-
 		poolDictionary = new Dictionary<string , Queue<GameObject>> ();
 
 		foreach (Pool pool in pools) {
@@ -80,14 +79,14 @@ using UnityEngine;
 		LoadHolder ();
 	}
 
-	private  void LoadWaiter(){
+	private void LoadWaiter(){
 		if (this.waiter != null)
 			return;
 		this.waiter = transform.Find ("Waiter");
 		Debug.LogWarning ("Add Waiter", gameObject);
 	}
 
-	private  void LoadHolder(){
+	private void LoadHolder(){
 		if (this.holder != null)
 			return;
 		this.holder = transform.Find ("Holder");

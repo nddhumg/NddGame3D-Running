@@ -44,6 +44,9 @@ public class TouchSimulation : Singleton<TouchSimulation>
 
 	void Update()
 	{
+		if (!GameManager.instance.IsPlay)
+			return;
+		
 		left = false;
 		right = false;
 		up = false;

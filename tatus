@@ -1,0 +1,29 @@
+[33mcommit 6b98b6c326871cdbced245baabe633ffdbd52db8[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: Ndd <duonghumg145@gmail.com>
+Date:   Sat Oct 12 15:24:06 2024 +0700
+
+    fix finish animation Player
+
+[33mcommit 56ee4329a18bb56c94163a3cf099d18417467494[m
+Author: Ndd <duonghumg145@gmail.com>
+Date:   Fri Oct 11 15:48:49 2024 +0700
+
+    Use states for the player controller and fix animations.
+
+[33mcommit 4798fa4a5318098542a27c9beaeeb6a6d6f614b3[m
+Author: Ndd <duonghumg145@gmail.com>
+Date:   Wed Oct 9 22:09:32 2024 +0700
+
+    add destroy Map
+
+[33mcommit d13de505a1193410a17726f97558378efb6303ec[m
+Author: Ndd <duonghumg145@gmail.com>
+Date:   Wed Oct 9 20:10:50 2024 +0700
+
+    finish prototype game
+
+[33mcommit 421934ada96d6abc55a74358ca4f2d32abec2dff[m
+Author: Ndd <duonghumg145@gmail.com>
+Date:   Wed Oct 9 20:09:09 2024 +0700
+
+    add gitignore

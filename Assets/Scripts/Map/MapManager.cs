@@ -39,6 +39,19 @@ public class MapManager : Singleton<MapManager> {
 		return false;
 	}
 
+	protected override void LoadComponent ()
+	{
+		base.LoadComponent ();
+		this.LoadMapPool ();
+	}
+
+	protected virtual void LoadMapPool(){
+		if (pool != null)
+			return;
+		this.pool = GetComponent<SpawnPool> ();
+		DebugLoadComponent ("SpawnPool");
+	}
+
 	void Spawn(){
 		GameObject map = pool.GetFromPool (GetMapNameSpawn(), Vector3.zero, Quaternion.identity);
 		float mapLenght = map.GetComponent<Map> ().Lenght;

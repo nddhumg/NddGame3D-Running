@@ -6,29 +6,38 @@ public class NddBehaviour : MonoBehaviour {
 
 	// Use this for initialization
 	
-	protected virtual void Start () {
+	protected virtual void Awake () {
 		this.LoadComponent();
 	}
-	protected virtual void Awake(){
-		this.LoadSingleton ();
-	}
-	// Update is called once per frame
 
-	protected virtual void Reset() {
+	protected virtual void Reset(){
+		Load ();
+	}
+
+	[ContextMenu("Load")]
+	protected virtual void Load() {
 		this.ResetValue();
 		this.LoadComponent ();
 		this.ResetValueComponent();
 	}
+
 	protected virtual void LoadComponent() {
         //Override
     }
+
 	protected virtual void ResetValueComponent() {
 		//Override
 	}
+
     protected virtual void ResetValue() {
         //Override
 	}
-	protected virtual void LoadSingleton(){
-		//Override
+
+	protected virtual void DebugLoadComponent(string nameComponent){
+		Debug.LogWarning ("Load " + nameComponent);
+	}
+
+	protected virtual void DebugLoadComponent(string nameComponent,GameObject obj){
+		Debug.LogWarning ("Load " + nameComponent, obj);
 	}
 }    

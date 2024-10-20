@@ -15,7 +15,6 @@ public class Map : MonoBehaviour {
 
 
 	void Reset(){
-		lenght = 0;
 		LoadMap ();
 	}
 
