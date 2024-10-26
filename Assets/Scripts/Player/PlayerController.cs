@@ -34,6 +34,7 @@ namespace Player{
 
 		private PlayerStateMachine stateMachine;
 
+		public Action OnDead;
 
 		public float MoveSpeed{
 			get{ 
@@ -65,13 +66,24 @@ namespace Player{
 			}
 		}
 
-		public void OnDead(RaycastHit hit){
-			if (!GameManager.instance.IsPlay)
+		public void Dead(RaycastHit hit){
+			if (!GameManager.instance.IsPlay())
 				return;
-			GameManager.instance.IsPlay = false;
+			GameManager.instance.Hold ();
 			anim.SetTrigger ("Dead");
 			velocity = Vector3.zero;
+			CameraShake.instance.Shake (0.25f,  0.2f);
+			OnDead?.Invoke ();
+		}
 
+		public void ReplayAnimation(){
+			anim.SetTrigger("Replay");
+		}
+
+		public virtual void ResetPlaying(){
+			moveSpeed = 10f;
+			transform.position = Vector3.zero;
+			velocity = Vector3.zero;
 		}
 
 		protected override void LoadComponent ()
@@ -114,7 +126,7 @@ namespace Player{
 		void Start(){
 			stateMachine = new PlayerStateMachine (controller, this, anim);
 			stateMachine.Initialize (stateMachine.idleState);
-			hindranceCollision.OnCollision += OnDead;
+			hindranceCollision.OnCollision += Dead;
 		}
 
 		void FixedUpdate(){
@@ -133,14 +145,14 @@ namespace Player{
 
 		void HandleVelocity(){
 			Falling ();
-			if (!GameManager.instance.IsPlay)
+			if (!GameManager.instance.IsPlay())
 				return;
 			ChangeLane ();
 			Move ();
 		}
 
 		void HandleAnimation(){
-			if (!GameManager.instance.IsPlay)
+			if (!GameManager.instance.IsPlay())
 				return;
 			if (velocity.y < 0)
 				anim.SetBool ("isFall", true);
@@ -215,7 +227,7 @@ namespace Player{
 		}
 
 		bool IsPlay(){
-			if (GameManager.instance.IsPlay) {
+			if (GameManager.instance.IsPlay()) {
 				return true;
 			} else {
 				velocity = Vector3.zero;

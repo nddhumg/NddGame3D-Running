@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4987346129393238}
   - component: {fileID: 65639898771906452}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PivotWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 4296343713885960}
   - component: {fileID: 33664080452625506}
   - component: {fileID: 23318304956967226}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SM_Prop_BaseWall_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

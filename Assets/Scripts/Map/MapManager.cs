@@ -31,12 +31,12 @@ public class MapManager : Singleton<MapManager> {
 		}
 	}
 
-	private bool IsPlayerNearMapEnd()
-	{
-		float distance = startPositionSpawnNext.z - player.position.z;
-		if (distance <= spawnDistacne)
-			return true;
-		return false;
+	public virtual void ResetPlaying(){
+		startPositionSpawnNext = new Vector3(0,-1.2f,0);
+		DestroyAllMap ();
+		endPositionLastMap = Vector3.zero;
+		Spawn ();
+		CaculatoLastMapNew();
 	}
 
 	protected override void LoadComponent ()
@@ -52,12 +52,36 @@ public class MapManager : Singleton<MapManager> {
 		DebugLoadComponent ("SpawnPool");
 	}
 
+	protected virtual void DestroyAllMap(){
+		while(maps.Count > 0){
+			pool.ReleaseToPool (maps.Dequeue ());
+		}
+	}
+
+	private bool IsPlayerNearMapEnd()
+	{
+		float distance = startPositionSpawnNext.z - player.position.z;
+		if (distance <= spawnDistacne)
+			return true;
+		return false;
+	}
+
 	void Spawn(){
 		GameObject map = pool.GetFromPool (GetMapNameSpawn(), Vector3.zero, Quaternion.identity);
-		float mapLenght = map.GetComponent<Map> ().Lenght;
+
+		Map mapScript = map.GetComponent<Map> ();
+		float mapLenght = mapScript.Lenght;
 		map.transform.position = startPositionSpawnNext;
 		startPositionSpawnNext.z += mapLenght;
 		maps.Enqueue (map);
+
+		SpawnItem (mapScript.GetRandomPositionItem());
+	}
+
+	void SpawnItem(Vector3 position){
+		if (!ItemManager.instance.IsSpawnItem)
+			return;
+		ItemManager.instance.Spawn (position, Quaternion.identity);
 	}
 
 	void DestroyMap(){

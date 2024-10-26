@@ -28,7 +28,7 @@ namespace Player{
 
 		void CheckHindranceCollision(){
 			
-			if (IsHindranceCollision()) {
+			if (IsHindranceCollision() && GameManager.instance.IsPlay()) {
 				OnCollision?.Invoke (hitCollision);
 			}
 		}

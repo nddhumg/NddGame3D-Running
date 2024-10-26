@@ -62,6 +62,14 @@ public class SpawnPool : NddBehaviour{
 		obj.transform.parent = waiter;
 	}
 
+	public virtual void ReleaseToPool(GameObject[] objs){
+		foreach (GameObject obj in objs) {
+			obj.SetActive (false);
+			obj.transform.parent = waiter;
+			poolDictionary[obj.name].Enqueue(obj.gameObject);
+		}
+	}
+
 	public virtual void ClearPool(string namePool){
 		if (!poolDictionary.ContainsKey (namePool)) {
 			return;

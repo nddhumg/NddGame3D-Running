@@ -25,6 +25,14 @@ namespace Player{
 			}
 		}
 
+//		public stat
+
+		public virtual void ResetPlaying(){
+			playerController.ResetPlaying ();
+			playerEffect.OffAllEffect ();
+			playerController.ReplayAnimation ();
+		}
+
 		protected override void LoadComponent ()
 		{
 			base.LoadComponent ();

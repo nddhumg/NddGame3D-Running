@@ -44,13 +44,12 @@ public class TouchSimulation : Singleton<TouchSimulation>
 
 	void Update()
 	{
-		if (!GameManager.instance.IsPlay)
-			return;
-		
 		left = false;
 		right = false;
 		up = false;
 		down = false;
+		if (!GameManager.instance.IsPlay())
+			return;
 
 
 		if (Input.touchCount > 0)

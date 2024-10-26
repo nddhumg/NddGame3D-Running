@@ -14,6 +14,8 @@ public class GameController : Singleton<GameController> {
 	[SerializeField] private float accelerationRate = 0.4f;
 	[SerializeField] private bool upgradableSpeedPlayer = true;
 
+	[SerializeField] private Vector3  sizeClearObstacles = new Vector3(0f,0f,0f);
+	[SerializeField] private LayerMask obstacles;
 
 	public float Score{
 		get{ 
@@ -31,11 +33,33 @@ public class GameController : Singleton<GameController> {
 	}
 
 	void Update(){
-		if (!GameManager.instance.IsPlay)
+		if (!GameManager.instance.IsPlay())
 			return;
 		score += scorePerSecond * Time.deltaTime * player.MoveSpeed;
 		GameLevel ();
 	}
+
+	public virtual void ClearObstacles(){
+		RaycastHit[] hits;
+		hits = Physics.BoxCastAll(player.transform.position,sizeClearObstacles, Vector3.forward, Quaternion.identity, 0,obstacles);
+		foreach (RaycastHit hit in hits) {
+			hit.transform.gameObject.SetActive(false);
+		}
+	}
+
+	public virtual void ResetPlaying(){
+		coin = 0;
+		score = 0;
+		upgradableSpeedPlayer = true;
+		timer = 0;
+	}
+
+//	void OnDrawGizmos()
+//	{
+//		Gizmos.color = Color.red;
+//		Gizmos.DrawRay(player.transform.position,Vector3.forward * 1);
+//		Gizmos.DrawWireCube(player.transform.position + Vector3.forward * 0, sizeClearObstacles*2f);
+//	}
 
 
 	void GameLevel(){

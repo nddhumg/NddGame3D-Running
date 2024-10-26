@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4757039354401558}
   - component: {fileID: 33610700950909622}
   - component: {fileID: 23558079828371828}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SM_Env_Dock_Poles_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4982550416074398}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PivotDock
   m_TagString: Untagged
   m_Icon: {fileID: 0}

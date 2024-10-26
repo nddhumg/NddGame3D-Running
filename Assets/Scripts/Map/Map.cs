@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Map : MonoBehaviour {
+public class Map : NddBehaviour {
 	[SerializeField] private float lenght = 0;
 	[SerializeField] private float width = 9f;
+
+	[SerializeField] private Transform[] transformItem;
 
 	public float Lenght{
 		get
@@ -13,10 +15,25 @@ public class Map : MonoBehaviour {
 		}
 	}
 
+	public Transform[] TransformItem{
+		get
+		{ 
+			return transformItem;
+		}
+	}
 
-	void Reset(){
+	protected override void Reset ()
+	{
+		base.Reset ();
 		LoadMap ();
 	}
+
+	public Vector3 GetRandomPositionItem(){
+		int random = Random.Range (0, transformItem.Length);
+		return transformItem [random].position;
+	}
+
+
 
 	private void LoadMap(){
 		ChangeScaleGroundToLenght ();
@@ -38,6 +55,7 @@ public class Map : MonoBehaviour {
 		BoxCollider col = transform.GetComponent<BoxCollider>();
 		col.size = new Vector3(width,0.5f,lenght);
 		Vector3 center = Vector3.zero;
+		center.y = -0.23f;
 		center.z += lenght / 2 + transform.position.z;
 		col.center = center;
 	}

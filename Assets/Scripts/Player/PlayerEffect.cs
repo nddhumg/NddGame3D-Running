@@ -7,9 +7,11 @@ namespace Player{
 
 		[Header("Equipment")]
 		[SerializeField] protected GameObject equipmentShield;
-		[SerializeField] protected GameObject equipmentMagnet;
 
 		[SerializeField] protected GameObject magnetCollision;
+
+		[SerializeField] protected GameObject uiMagnet;
+		[SerializeField] protected GameObject uiShield;
 
 		private List<BaseEffect> effects = new List<BaseEffect>();
 
@@ -26,6 +28,8 @@ namespace Player{
 		}
 
 		void Update(){
+			if (!GameManager.instance.IsPlay ())
+				return;
 			foreach (BaseEffect effect in effects) {
 				if (effect == null)
 					continue;
@@ -34,6 +38,8 @@ namespace Player{
 		}
 
 		void FixedUpdate(){
+			if (!GameManager.instance.IsPlay ())
+				return;
 			foreach (BaseEffect effect in effects) {
 				if (effect == null)
 					continue;
@@ -42,9 +48,15 @@ namespace Player{
 		}
 
 		void Start(){
-			effects.Add (new ShieldEffect ());
-			effects.Add (new MagnetEffect ());
+			effects.Add (new ShieldEffect (uiShield));
+			effects.Add (new MagnetEffect (uiMagnet));
 	
+		}
+
+		public virtual void OffAllEffect(){
+			foreach (BaseEffect effect in effects) {
+				effect.End ();
+			}
 		}
 
 		public virtual void AddEffect(EffectName name){
@@ -55,7 +67,15 @@ namespace Player{
 			}
 		}
 
-
+		public virtual BaseEffect GetBaseEffectByName(EffectName name){
+			foreach (BaseEffect effect in effects) {
+				if (effect.EffectName == name) {
+					return effect;
+				}
+			}
+			Debug.LogWarning ("Dont base effect name: " + name);
+			return null;
+		}
 
 
 	}
