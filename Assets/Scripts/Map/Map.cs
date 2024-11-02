@@ -5,8 +5,8 @@ using UnityEngine;
 public class Map : NddBehaviour {
 	[SerializeField] private float lenght = 0;
 	[SerializeField] private float width = 9f;
-
-	[SerializeField] private Transform[] transformItem;
+	[SerializeField] private List<GameObject> hindranceDestroy;
+	[SerializeField] private List<Transform> transformItem = new List<Transform>();
 
 	public float Lenght{
 		get
@@ -15,12 +15,36 @@ public class Map : NddBehaviour {
 		}
 	}
 
-	public Transform[] TransformItem{
+	public List<Transform> TransformItem{
 		get
 		{ 
 			return transformItem;
 		}
 	}
+
+
+	public Vector3 GetRandomPositionItem(){
+		int random = Random.Range (0, transformItem.Count);
+		return transformItem [random].position;
+	}
+
+	public void HindraceActive(){
+		if (hindranceDestroy.Count == 0)
+			return;
+		foreach (GameObject obj in hindranceDestroy) {
+			obj.SetActive (true);
+		}
+		hindranceDestroy.Clear ();
+	}
+
+	public void DestroyHindrace(GameObject hindrace){
+		hindranceDestroy.Add(hindrace);
+	}
+
+	private void LoadMap(){
+		ChangeScaleGroundToLenght ();
+	}
+
 
 	protected override void Reset ()
 	{
@@ -28,15 +52,21 @@ public class Map : NddBehaviour {
 		LoadMap ();
 	}
 
-	public Vector3 GetRandomPositionItem(){
-		int random = Random.Range (0, transformItem.Length);
-		return transformItem [random].position;
+	protected override void LoadComponent ()
+	{
+		base.LoadComponent ();
+		LoadPositionItem ();
 	}
 
-
-
-	private void LoadMap(){
-		ChangeScaleGroundToLenght ();
+	protected virtual void LoadPositionItem(){
+		if (this.transformItem.Count > 0) {
+			return;
+		}
+		Transform parent = transform.Find ("PositionItem");
+		foreach (Transform child in parent) {
+			this.transformItem.Add (child);
+		}
+		DebugLoadComponent ("PositionItem");
 	}
 
 	private void ChangeScaleGroundToLenght(){
@@ -59,4 +89,5 @@ public class Map : NddBehaviour {
 		center.z += lenght / 2 + transform.position.z;
 		col.center = center;
 	}
+
 }

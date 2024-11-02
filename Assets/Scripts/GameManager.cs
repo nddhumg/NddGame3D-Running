@@ -15,6 +15,7 @@ public class GameManager : Singleton<GameManager> {
 	private State currentState = State.Idle; 
 
 	[SerializeField] protected float maxTimeScale = 1f;
+	private Coroutine rePause;
 
 
 	public enum State{
@@ -65,9 +66,18 @@ public class GameManager : Singleton<GameManager> {
 		currentState = State.PLaying;
 	}
 
+	public virtual void RePlay(){
+		currentState = State.PLaying;
+		PlayerManager.instance.PlayerController.ReplayAnimation ();
+		GameController.instance.ClearHindrance ();
+	}
+
 	public virtual void Pause(){
+		if(rePause != null)
+			StopCoroutine (rePause);
 		currentState = State.Pause;
 		Time.timeScale = 0;
+
 	}
 
 	public virtual void Hold(){
@@ -89,7 +99,7 @@ public class GameManager : Singleton<GameManager> {
 
 	public virtual void RePause(float timeScaleStep,float waitForSeconds = 0f,float timeScaleStart = 0f){
 		currentState = State.PLaying;
-		StartCoroutine (CoroutineRePause (timeScaleStep,waitForSeconds,timeScaleStart));
+		rePause = StartCoroutine (CoroutineRePause (timeScaleStep,waitForSeconds,timeScaleStart));
 	}
 
 	public virtual void ResetPLaying(){

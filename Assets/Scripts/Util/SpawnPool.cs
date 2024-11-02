@@ -19,6 +19,12 @@ public class SpawnPool : NddBehaviour{
 	[SerializeField] protected Transform waiter;
 	[SerializeField] protected Transform holder;
 
+	public List<Pool> Pools{
+		get{ 
+			return pools;
+		}
+	}
+
 	protected override void Awake(){
 		base.Awake ();
 		poolDictionary = new Dictionary<string , Queue<GameObject>> ();

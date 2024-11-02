@@ -66,18 +66,18 @@ namespace Player{
 			}
 		}
 
-		public void Dead(RaycastHit hit){
+		public void Dead(){
 			if (!GameManager.instance.IsPlay())
 				return;
 			GameManager.instance.Hold ();
-			anim.SetTrigger ("Dead");
+			stateMachine.ChangeState (stateMachine.deadState);
 			velocity = Vector3.zero;
 			CameraShake.instance.Shake (0.25f,  0.2f);
 			OnDead?.Invoke ();
 		}
 
 		public void ReplayAnimation(){
-			anim.SetTrigger("Replay");
+			stateMachine.ChangeState (stateMachine.idleState);
 		}
 
 		public virtual void ResetPlaying(){
@@ -89,24 +89,10 @@ namespace Player{
 		protected override void LoadComponent ()
 		{
 			base.LoadComponent ();
-			LoadCharacterController ();
-			LoadHindranceCollisionHandler ();
-			LoadAnimator ();
+			LoadScript<CharacterController> (ref controller);
+			LoadScriptInChild<HindranceCollisionHandler> (ref hindranceCollision);
+			LoadScript<Animator> (ref anim);
 			LoadCheckGround ();
-		}
-
-		protected virtual void LoadCharacterController(){
-			if (controller != null)
-				return;
-			controller = GetComponent<CharacterController> ();
-			DebugLoadComponent ("CharacterController");
-		}
-
-		protected virtual void LoadHindranceCollisionHandler(){
-			if (hindranceCollision != null)
-				return;
-			hindranceCollision = GetComponentInChildren<HindranceCollisionHandler> ();
-			DebugLoadComponent ("HindranceCollisionHandler");
 		}
 
 		protected virtual void LoadCheckGround(){
@@ -116,13 +102,6 @@ namespace Player{
 			DebugLoadComponent ("CheckGround");
 		}
 
-		protected virtual void LoadAnimator(){
-			if (anim != null)
-				return;
-			anim = GetComponentInChildren<Animator> ();
-			DebugLoadComponent ("Animator");
-		}
-
 		void Start(){
 			stateMachine = new PlayerStateMachine (controller, this, anim);
 			stateMachine.Initialize (stateMachine.idleState);
@@ -130,14 +109,14 @@ namespace Player{
 		}
 
 		void FixedUpdate(){
-			stateMachine.FixedUpdate ();
-			velocity += stateMachine.velocity;
 			HandleVelocity ();
 			HandleAnimation ();
 			controller.Move (velocity);
 		}
 
 		void Update(){
+			if (!GameManager.instance.IsPlay ())
+				return;
 			stateMachine.Update ();
 			CheckChangeLane ();
 			CheckGrounded ();
@@ -147,6 +126,8 @@ namespace Player{
 			Falling ();
 			if (!GameManager.instance.IsPlay())
 				return;
+			stateMachine.FixedUpdate ();
+			velocity += stateMachine.velocity;
 			ChangeLane ();
 			Move ();
 		}
@@ -224,15 +205,6 @@ namespace Player{
 			if (isGrounded)
 				return;
 			velocity.y -= gravity * Time.fixedDeltaTime;
-		}
-
-		bool IsPlay(){
-			if (GameManager.instance.IsPlay()) {
-				return true;
-			} else {
-				velocity = Vector3.zero;
-				return false;
-			}
 		}
 
 	}

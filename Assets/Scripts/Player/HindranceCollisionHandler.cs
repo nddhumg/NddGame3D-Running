@@ -13,8 +13,7 @@ namespace Player{
 		[SerializeField] private Vector3 positionRollCheck = new Vector3(0f, -0.54f, 0.53f);
 
 		[SerializeField] private LayerMask whatIsHindrance;
-		public Action<RaycastHit> OnCollision;
-		private RaycastHit hitCollision;
+		public Action OnCollision;
 		[SerializeField] private float distanceRaycast = 0.2f;
 
 
@@ -23,13 +22,15 @@ namespace Player{
 		}
 
 		void FixedUpdate(){
+			if (!GameManager.instance.IsPlay ())
+				return;
 			CheckHindranceCollision ();
 		}
 
 		void CheckHindranceCollision(){
 			
 			if (IsHindranceCollision() && GameManager.instance.IsPlay()) {
-				OnCollision?.Invoke (hitCollision);
+				OnCollision?.Invoke ();
 			}
 		}
 
@@ -44,7 +45,7 @@ namespace Player{
 		}
 
 		bool IsHindranceCollision(){
-			return Physics.BoxCast(transform.position, sizeBox*0.5f, transform.forward, out hitCollision, Quaternion.identity, distanceRaycast,whatIsHindrance);
+			return Physics.BoxCast(transform.position, sizeBox*0.5f, transform.forward, Quaternion.identity, distanceRaycast,whatIsHindrance);
 		}                     
 
 //		void OnDrawGizmos()

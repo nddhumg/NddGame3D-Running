@@ -48,9 +48,6 @@ public class TouchSimulation : Singleton<TouchSimulation>
 		right = false;
 		up = false;
 		down = false;
-		if (!GameManager.instance.IsPlay())
-			return;
-
 
 		if (Input.touchCount > 0)
 		{
@@ -78,6 +75,7 @@ public class TouchSimulation : Singleton<TouchSimulation>
 			HandleTouch(simulatedTouchPosition, TouchPhase.Ended);
 		}
 		#endif
+
 	}
 
 	// Hàm xử lý thao tác touch hoặc giả lập từ chuột

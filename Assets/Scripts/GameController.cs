@@ -5,7 +5,8 @@ using UnityEngine;
 public class GameController : Singleton<GameController> {
 	[SerializeField] private Player.PlayerController player;
 	[SerializeField] private float score = 0;
-	[SerializeField] private float scorePerSecond = 1;
+	[SerializeField] private float scorePerSecond = 0.25f;
+//	[SerializeField] private float 
 
 	[SerializeField] private float coin = 0;
 
@@ -39,12 +40,15 @@ public class GameController : Singleton<GameController> {
 		GameLevel ();
 	}
 
-	public virtual void ClearObstacles(){
+	public virtual void ClearHindrance(){
 		RaycastHit[] hits;
 		hits = Physics.BoxCastAll(player.transform.position,sizeClearObstacles, Vector3.forward, Quaternion.identity, 0,obstacles);
+		Hindrance hindrance ;
 		foreach (RaycastHit hit in hits) {
-			hit.transform.gameObject.SetActive(false);
+			hindrance = hit.transform.GetComponent<Hindrance> ();
+			hindrance.Destroy();
 		}
+		CameraFlash.instance.Flash(1f);
 	}
 
 	public virtual void ResetPlaying(){

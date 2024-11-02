@@ -55,15 +55,7 @@ public class ItemManager : Singleton<ItemManager> {
 	protected override void LoadComponent ()
 	{
 		base.LoadComponent ();
-		LoadPool ();
-	}
-
-	protected virtual void LoadPool(){
-		if (pool != null) {
-			return;
-		}
-		pool = GetComponent<SpawnPool> ();
-		DebugLoadComponent ("SpawnPool");
+		LoadScript<SpawnPool> (ref pool, gameObject);
 	}
 
 	protected string GetItemNameRandom(){

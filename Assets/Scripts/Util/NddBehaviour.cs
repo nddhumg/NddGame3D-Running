@@ -22,8 +22,35 @@ public class NddBehaviour : MonoBehaviour {
 	}
 
 	protected virtual void LoadComponent() {
-        //Override
     }
+
+	protected void  LoadScript<T>(ref T script, GameObject obj) where T : class{
+		if (script != null)
+			return;
+		script = obj.GetComponent<T> ();
+		DebugLoadComponent (typeof(T).Name);
+	}
+
+	protected void LoadScript<T>(ref T script, Transform obj) where T : class{
+		if (script != null)
+			return;
+		script = obj.GetComponent<T> ();
+		DebugLoadComponent (typeof(T).Name);
+	}
+
+	protected void LoadScript<T>(ref T script) where T : class{
+		if (script != null)
+			return;
+		script = gameObject.GetComponent<T> ();
+		DebugLoadComponent (typeof(T).Name);
+	}
+
+	protected void LoadScriptInChild<T>(ref T script) where T : class{
+		if (script != null)
+			return;
+		script = gameObject.GetComponentInChildren<T> ();
+		DebugLoadComponent (typeof(T).Name);
+	}
 
 	protected virtual void ResetValueComponent() {
 		//Override
@@ -34,10 +61,6 @@ public class NddBehaviour : MonoBehaviour {
 	}
 
 	protected virtual void DebugLoadComponent(string nameComponent){
-		Debug.LogWarning ("Load " + nameComponent);
-	}
-
-	protected virtual void DebugLoadComponent(string nameComponent,GameObject obj){
-		Debug.LogWarning ("Load " + nameComponent, obj);
+		Debug.LogWarning ("Load Script " + nameComponent, gameObject);
 	}
 }    

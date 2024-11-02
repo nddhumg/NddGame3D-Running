@@ -4,9 +4,11 @@ using UnityEngine;
 
 public enum MapName{
 	Map,
+	Map2,
 }
 public class MapManager : Singleton<MapManager> {
 	[SerializeField] private SpawnPool pool;
+	private List<SpawnPool.Pool> listPool;
 	 private Queue<GameObject> maps = new Queue<GameObject>();
 	[SerializeField] private Vector3 startPositionSpawnNext = new Vector3(0,-1.2f,0);
 
@@ -18,6 +20,7 @@ public class MapManager : Singleton<MapManager> {
 	[SerializeField] private float distanceDestroyMap = 20f;
 
 	void Start(){
+		listPool = pool.Pools;
 		Spawn ();
 		CaculatoLastMapNew();
 	}
@@ -42,20 +45,14 @@ public class MapManager : Singleton<MapManager> {
 	protected override void LoadComponent ()
 	{
 		base.LoadComponent ();
-		this.LoadMapPool ();
+		LoadScript<SpawnPool> (ref pool, gameObject);
 	}
 
-	protected virtual void LoadMapPool(){
-		if (pool != null)
-			return;
-		this.pool = GetComponent<SpawnPool> ();
-		DebugLoadComponent ("SpawnPool");
-	}
 
 	protected virtual void DestroyAllMap(){
-		while(maps.Count > 0){
-			pool.ReleaseToPool (maps.Dequeue ());
-		}
+		pool.ReleaseToPool (lastMap.gameObject);
+		pool.ReleaseToPool (maps.ToArray ());
+		maps.Clear ();
 	}
 
 	private bool IsPlayerNearMapEnd()
@@ -74,7 +71,7 @@ public class MapManager : Singleton<MapManager> {
 		map.transform.position = startPositionSpawnNext;
 		startPositionSpawnNext.z += mapLenght;
 		maps.Enqueue (map);
-
+		mapScript.HindraceActive ();
 		SpawnItem (mapScript.GetRandomPositionItem());
 	}
 
@@ -110,7 +107,8 @@ public class MapManager : Singleton<MapManager> {
 	}
 		
 	string GetMapNameSpawn(){
-		return MapName.Map.ToString ();
+		int ran = Random.Range (0, listPool.Count);
+		return listPool [ran].tag;
 	}
 
 

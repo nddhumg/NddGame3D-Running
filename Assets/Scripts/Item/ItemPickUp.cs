@@ -20,18 +20,11 @@ public class ItemPickUp : NddBehaviour, IPickUpAble {
 	public virtual void DestroyOnPickUp(){
 		itemDestroy.Destroy ();
 	}
-
+	[ButtonAttribute]
 	protected override void LoadComponent ()
 	{
 		base.LoadComponent ();
-		LoadItemDestroy ();
-	}
-
-	protected virtual void LoadItemDestroy(){
-		if (itemDestroy != null)
-			return;
-		itemDestroy = GetComponentInChildren<ItemDestroy> ();
-		DebugLoadComponent ("ItemDestroy");
+		LoadScriptInChild<ItemDestroy> (ref itemDestroy);
 	}
 
 }

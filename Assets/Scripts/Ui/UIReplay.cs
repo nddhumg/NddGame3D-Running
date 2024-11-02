@@ -16,8 +16,6 @@ public class UIReplay : NddBehaviour {
 	[SerializeField] private Coroutine sliderCoroutine;
 	private bool isActionReplay = false;
 
-
-
 	void Start(){
 		AddActionReplay ();
 		SetActive (false);
@@ -27,10 +25,8 @@ public class UIReplay : NddBehaviour {
 
 	public virtual void Replay(){
 		StopCoroutine(sliderCoroutine);
-		GameManager.instance.Play ();
-		Player.PlayerManager.instance.PlayerController.ReplayAnimation ();
+		GameManager.instance.RePlay ();
 		SetActive (false);
-		GameController.instance.ClearObstacles ();
 		isActionReplay = true;
 		AddActionReplay ();
 

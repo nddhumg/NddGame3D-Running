@@ -27,9 +27,8 @@ public class ShieldEffect : BaseEffectUpdate {
 		player.PlayerEffect.EquipmentShield.SetActive (false);
 	}
 
-	protected virtual void Shield(RaycastHit hit){
-		Debug.Log (hit.transform.name);
-		hit.transform.gameObject.SetActive (false);
+	protected virtual void Shield(){
+		GameController.instance.ClearHindrance ();
 		ChangeState (State.Exit);
 	}
 }
