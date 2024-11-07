@@ -25,13 +25,14 @@ public class UIPause : MonoBehaviour {
 	}
 
 	protected virtual void OnContinue(){
-		SetActive(false);
+		ExitUI ();
 	}
 
 	protected virtual void OnGiveUp(){
 		SetActive (false);
 		UIManager.instance.EndPlaying ();
 		GameManager.instance.EndPlaying ();
+		Time.timeScale = 1;
 	}
 
 	protected virtual void ExitUI(){

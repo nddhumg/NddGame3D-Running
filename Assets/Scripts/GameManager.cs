@@ -5,13 +5,13 @@ using Player;
 
 [System.Serializable]
 public struct GameData{
-	public float coin;
-	public float highScore;
+	public uint coin;
+	public uint highScore;
 }
 
 public class GameManager : Singleton<GameManager> {
-	[SerializeField] private float coin = 0;
-	[SerializeField] private float highScore = 0;
+	[SerializeField] private uint coin = 0;
+	[SerializeField] private uint highScore = 0;
 	private State currentState = State.Idle; 
 
 	[SerializeField] protected float maxTimeScale = 1f;
@@ -37,13 +37,7 @@ public class GameManager : Singleton<GameManager> {
 		System.SaveLoadSystem.LoadGame ();
 	}
 
-	void Update(){
-		if (Input.GetKeyDown (KeyCode.A)) {
-			System.SaveLoadSystem.SaveGame ();
-		}
-	}
-
-	private void OnApplicationQuit()
+	protected virtual void OnApplicationQuit()
 	{
 		System.SaveLoadSystem.SaveGame ();
 	}
@@ -111,9 +105,8 @@ public class GameManager : Singleton<GameManager> {
 	}
 
 	private void CheckHighScore(){
-		float score = GameController.instance.Score;
-		if (score > this.highScore) {
-			this.highScore = Mathf.Round (score * 100f) / 100f;
+		if (GameController.instance.Score > this.highScore) {
+			this.highScore = GameController.instance.Score;
 		}
 	}
 

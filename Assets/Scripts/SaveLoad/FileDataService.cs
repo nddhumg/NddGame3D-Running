@@ -14,21 +14,22 @@ namespace System{
 			this.fileExtension = dataPath;
 			this.serializer = serializer;
 		}
-			public void Save<T>(ref T data, bool overwrite = true) {
-				string fileLocation = GetPathToFile (typeof(T).Name);
+		public void Save<T>(ref T data, bool overwrite = true) {
+			string fileLocation = GetPathToFile (typeof(T).Name);
 
 			if (!overwrite && File.Exists (fileLocation)) {
-				throw new IOException ($"The file '{typeof(T).Name}.{fileExtension}' already exits and cannot be overwite." );
+				Debug.LogWarning ($"The file '{typeof(T).Name}.{fileExtension}' already exits and cannot be overwite." );
 			}
 
 			File.WriteAllText (fileLocation, serializer.Serialize (data));
+			Debug.Log (dataPath);
 		}
 
 		public T Load <T>(string name){
 			string fileLocation = GetPathToFile (name);
 
 			if (!File.Exists (fileLocation)) {
-				throw new IOException ($"No presisted GameData with name '{name}'" );
+				Debug.LogWarning ($"No presisted GameData with name '{name}'" );
 			}
 
 			return serializer.Deserialize<T> (File.ReadAllText (fileLocation));

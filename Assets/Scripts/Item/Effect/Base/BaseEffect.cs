@@ -40,6 +40,9 @@ public class BaseEffect  {
 		get{
 			return activeTime;	
 		}
+		set{ 
+			activeTime = value;
+		}
 	}
 
 	public BaseEffect(GameObject ui) {

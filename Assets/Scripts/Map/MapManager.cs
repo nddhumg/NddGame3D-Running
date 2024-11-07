@@ -71,13 +71,11 @@ public class MapManager : Singleton<MapManager> {
 		map.transform.position = startPositionSpawnNext;
 		startPositionSpawnNext.z += mapLenght;
 		maps.Enqueue (map);
-		mapScript.HindraceActive ();
-		SpawnItem (mapScript.GetRandomPositionItem());
+		if (ItemManager.instance.IsSpawnItem && mapScript.IsMapHasItem())
+			SpawnItem (mapScript.GetRandomPositionItem());
 	}
 
 	void SpawnItem(Vector3 position){
-		if (!ItemManager.instance.IsSpawnItem)
-			return;
 		ItemManager.instance.Spawn (position, Quaternion.identity);
 	}
 

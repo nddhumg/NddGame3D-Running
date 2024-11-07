@@ -2,6 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public struct UpgradeData{
+	public List<EffectName> names;
+	public List<int> levels ;
+
+	public UpgradeData(List<EffectName> names, List<int> levels ){
+		this.names = names;
+		this.levels = levels;
+	}
+}
+
 namespace Player{
 	public class PlayerEffect : NddBehaviour {
 
@@ -13,7 +24,8 @@ namespace Player{
 		[SerializeField] protected GameObject uiMagnet;
 		[SerializeField] protected GameObject uiShield;
 
-		private List<BaseEffect> effects = new List<BaseEffect>();
+		protected List<BaseEffect> effects = new List<BaseEffect>();
+		protected UpgradeSystem upgrade = new UpgradeSystem();
 
 		public GameObject EquipmentShield{
 			get{ 
@@ -51,6 +63,29 @@ namespace Player{
 			effects.Add (new ShieldEffect (uiShield));
 			effects.Add (new MagnetEffect (uiMagnet));
 	
+		}
+
+		public virtual void Save(ref UpgradeData data){
+			data.names.Clear ();
+			data.levels.Clear ();
+			data.names.AddRange(upgrade.GetNamesEffect());
+			data.levels.AddRange (upgrade.GetLevelsEffect());
+		}
+
+		public virtual void Load(UpgradeData data){
+			int index = 0;
+			foreach (EffectName name in data.names) {
+				upgrade.SetLevel (name,data.levels[index]);
+				index++;
+			}
+		}
+
+		public int GetLevelEffect(EffectName name){
+			return upgrade.GetLevel(name);
+		}
+
+		public virtual void LevelUp(EffectName name){
+			upgrade.LevelUp (name);
 		}
 
 		public virtual void OffAllEffect(){

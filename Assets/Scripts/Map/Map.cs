@@ -8,6 +8,10 @@ public class Map : NddBehaviour {
 	[SerializeField] private List<GameObject> hindranceDestroy;
 	[SerializeField] private List<Transform> transformItem = new List<Transform>();
 
+	void OnEnable(){
+		HindraceActive ();
+	}
+
 	public float Lenght{
 		get
 		{ 
@@ -21,21 +25,15 @@ public class Map : NddBehaviour {
 			return transformItem;
 		}
 	}
-
+	public bool IsMapHasItem(){
+		return transformItem.Count != 0;  
+	}
 
 	public Vector3 GetRandomPositionItem(){
 		int random = Random.Range (0, transformItem.Count);
 		return transformItem [random].position;
 	}
 
-	public void HindraceActive(){
-		if (hindranceDestroy.Count == 0)
-			return;
-		foreach (GameObject obj in hindranceDestroy) {
-			obj.SetActive (true);
-		}
-		hindranceDestroy.Clear ();
-	}
 
 	public void DestroyHindrace(GameObject hindrace){
 		hindranceDestroy.Add(hindrace);
@@ -45,6 +43,14 @@ public class Map : NddBehaviour {
 		ChangeScaleGroundToLenght ();
 	}
 
+	protected void HindraceActive(){
+		if (hindranceDestroy.Count == 0)
+			return;
+		foreach (GameObject obj in hindranceDestroy) {
+			obj.SetActive (true);
+		}
+		hindranceDestroy.Clear ();
+	}
 
 	protected override void Reset ()
 	{
@@ -63,6 +69,8 @@ public class Map : NddBehaviour {
 			return;
 		}
 		Transform parent = transform.Find ("PositionItem");
+		if (parent == null)
+			return;
 		foreach (Transform child in parent) {
 			this.transformItem.Add (child);
 		}

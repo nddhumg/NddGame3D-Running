@@ -30,6 +30,7 @@ namespace Player{
 		void CheckHindranceCollision(){
 			
 			if (IsHindranceCollision() && GameManager.instance.IsPlay()) {
+				
 				OnCollision?.Invoke ();
 			}
 		}
@@ -43,7 +44,6 @@ namespace Player{
 				transform.localPosition = positionBoxCheck;
 			}
 		}
-
 		bool IsHindranceCollision(){
 			return Physics.BoxCast(transform.position, sizeBox*0.5f, transform.forward, Quaternion.identity, distanceRaycast,whatIsHindrance);
 		}                     

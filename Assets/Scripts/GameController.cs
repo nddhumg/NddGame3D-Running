@@ -3,28 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameController : Singleton<GameController> {
-	[SerializeField] private Player.PlayerController player;
 	[SerializeField] private float score = 0;
-	[SerializeField] private float scorePerSecond = 0.25f;
+	[SerializeField] private uint multiplierScore = 1;
 //	[SerializeField] private float 
 
-	[SerializeField] private float coin = 0;
+	[SerializeField] private uint coin = 0;
 
 	[SerializeField] private float timer = 0;
 	[SerializeField] private float speedPlayerIncreaseDelay = 20f;
 	[SerializeField] private float accelerationRate = 0.4f;
 	[SerializeField] private bool upgradableSpeedPlayer = true;
 
-	[SerializeField] private Vector3  sizeClearObstacles = new Vector3(0f,0f,0f);
+	[SerializeField] private Vector3  sizeClearObstacles = new Vector3(3f,2f,2f);
 	[SerializeField] private LayerMask obstacles;
 
-	public float Score{
+	private Player.PlayerManager player;
+
+	public uint Score{
 		get{ 
-			return score;
+			return (uint)score;
 		}
 	}
 
-	public float Coin{
+	public uint Coin{
 		get{ 
 			return coin;
 		}
@@ -33,20 +34,22 @@ public class GameController : Singleton<GameController> {
 		}
 	}
 
+	void Start(){
+		player = Player.PlayerManager.instance;
+	}
+
 	void Update(){
 		if (!GameManager.instance.IsPlay())
 			return;
-		score += scorePerSecond * Time.deltaTime * player.MoveSpeed;
+		score += multiplierScore * Time.deltaTime * player.PlayerController.MoveSpeed;
 		GameLevel ();
 	}
 
 	public virtual void ClearHindrance(){
 		RaycastHit[] hits;
 		hits = Physics.BoxCastAll(player.transform.position,sizeClearObstacles, Vector3.forward, Quaternion.identity, 0,obstacles);
-		Hindrance hindrance ;
 		foreach (RaycastHit hit in hits) {
-			hindrance = hit.transform.GetComponent<Hindrance> ();
-			hindrance.Destroy();
+			hit.transform.gameObject.SetActive (false);
 		}
 		CameraFlash.instance.Flash(1f);
 	}
@@ -74,8 +77,8 @@ public class GameController : Singleton<GameController> {
 			return;
 		}
 		timer = 0;
-		player.MoveSpeed += accelerationRate;
-		if (player.MoveSpeed == player.MaxSpeed)
+		player.PlayerController.MoveSpeed += accelerationRate;
+		if (player.PlayerController.MoveSpeed == player.PlayerController.MaxSpeed)
 			upgradableSpeedPlayer = false;
 		
 	}

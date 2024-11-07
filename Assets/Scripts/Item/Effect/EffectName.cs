@@ -3,6 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum EffectName {
-	Shield,
-	Magnet,
+	Shield = 0,
+	Magnet = 1,
 }

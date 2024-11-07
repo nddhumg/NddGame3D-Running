@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 public class Coin : MonoBehaviour ,IPickUpAble, IMagnetAble {
-	[SerializeField] private int value = 1;
+	[SerializeField] private uint value = 1;
 
 	[Header("Magnet")]
 	[SerializeField] private float speedMagnetAble = 0.1f;

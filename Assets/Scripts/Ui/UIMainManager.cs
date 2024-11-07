@@ -7,13 +7,16 @@ public class UIMainManager : MonoBehaviour {
 	[SerializeField] private GameObject uiMain;
 
 	[SerializeField] private Button goButton;
+	[SerializeField] private Button systemButton;
 	[SerializeField] private Text highScore;
 
 	[SerializeField] private UISummary uiSummary;
+	[SerializeField] private UISystemPlayer uiSystem;
 
 
 	void Start(){
 		goButton.onClick.AddListener (OnButtonGo);
+		systemButton.onClick.AddListener (OnSystem);
 		LoadHighScore ();
 	}
 
@@ -40,4 +43,7 @@ public class UIMainManager : MonoBehaviour {
 		UIManager.instance.Play ();
 	}
 
+	protected virtual void OnSystem(){
+		uiSystem.SetActive (true);
+	}
 }
