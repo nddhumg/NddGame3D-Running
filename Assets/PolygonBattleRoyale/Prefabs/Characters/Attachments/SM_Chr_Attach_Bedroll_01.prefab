@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4603261506592374}
   - component: {fileID: 33502523989535668}
   - component: {fileID: 23155338548913610}
-  - component: {fileID: 64624335963824032}
   m_Layer: 0
   m_Name: SM_Chr_Attach_Bedroll_01
   m_TagString: Untagged
@@ -83,17 +82,3 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1751292310752084}
   m_Mesh: {fileID: 4300000, guid: 8044def7f2b040949ad328f8ac65e8f2, type: 3}
---- !u!64 &64624335963824032
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1751292310752084}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 43581988398801614, guid: 6e0ad5385ea220148a6f8aae48139719, type: 2}

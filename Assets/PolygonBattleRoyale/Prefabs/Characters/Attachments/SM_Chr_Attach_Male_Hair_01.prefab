@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4906368019915420}
   - component: {fileID: 33133844526350622}
   - component: {fileID: 23399468511368244}
-  - component: {fileID: 64755656436681596}
   m_Layer: 0
   m_Name: SM_Chr_Attach_Male_Hair_01
   m_TagString: Untagged
@@ -83,17 +82,3 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1964416899909496}
   m_Mesh: {fileID: 4300000, guid: 2728dc2ef47c15046a790f0beb621bf4, type: 3}
---- !u!64 &64755656436681596
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1964416899909496}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 43274457066402842, guid: ade6326975be2974390e33d2dd5b07dc, type: 2}

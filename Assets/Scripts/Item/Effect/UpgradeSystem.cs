@@ -67,6 +67,13 @@ public class UpgradeSystem  {
 		CreateDataEffectActiveTime ();
 	}
 
+	public virtual void GetEffect(ref List<EffectName> names,ref List<int> levels){
+		foreach (EffectActiveTime effect in effects) {
+			names.Add (effect.Name);
+			levels.Add (effect.Level);
+		}
+	}
+
 	public virtual EffectName[] GetNamesEffect(){
 		List<EffectName> names = new List<EffectName>();
 		foreach (EffectActiveTime effect in effects) {

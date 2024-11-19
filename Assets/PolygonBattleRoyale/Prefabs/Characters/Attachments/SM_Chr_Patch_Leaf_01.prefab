@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4443097516462698}
   - component: {fileID: 33130635247721412}
   - component: {fileID: 23747226973800160}
-  - component: {fileID: 64440508154419002}
   m_Layer: 0
   m_Name: SM_Chr_Patch_Leaf_01
   m_TagString: Untagged
@@ -83,17 +82,3 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1492095166090114}
   m_Mesh: {fileID: 4300000, guid: a4368afc94fb3a048b5b95c820ed6c8a, type: 3}
---- !u!64 &64440508154419002
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1492095166090114}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 43905056807170172, guid: a5bdd9ca98d9b5b49b050d7b55a845d5, type: 2}

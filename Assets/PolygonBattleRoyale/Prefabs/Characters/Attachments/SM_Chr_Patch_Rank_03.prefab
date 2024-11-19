@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4522677273907880}
   - component: {fileID: 33290326995010454}
   - component: {fileID: 23259888436627216}
-  - component: {fileID: 64567849368945212}
   m_Layer: 0
   m_Name: SM_Chr_Patch_Rank_03
   m_TagString: Untagged
@@ -83,17 +82,3 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1642815530264894}
   m_Mesh: {fileID: 4300000, guid: 46d6cabb5d4f5f94ea3fee38873b8d84, type: 3}
---- !u!64 &64567849368945212
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1642815530264894}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 43778120471782514, guid: 6b4531f3b18d1414a88a8d8a2e437797, type: 2}

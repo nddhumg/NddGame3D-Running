@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4774971843379696}
   - component: {fileID: 33996712707249934}
   - component: {fileID: 23716213927954822}
-  - component: {fileID: 64633861806648254}
   m_Layer: 0
   m_Name: SM_Chr_Attach_Eyepatch_01
   m_TagString: Untagged
@@ -83,17 +82,3 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1537627069323488}
   m_Mesh: {fileID: 4300000, guid: 1eb961c9ebf78cd45b27d556a5964cb3, type: 3}
---- !u!64 &64633861806648254
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1537627069323488}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 43653697055095124, guid: 632b0a6e68c10d244a3d6c7a3e1b2270, type: 2}

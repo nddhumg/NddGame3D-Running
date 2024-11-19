@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4327643215273132}
   - component: {fileID: 33396158219907378}
   - component: {fileID: 23008511818866510}
-  - component: {fileID: 64214277578505742}
   m_Layer: 0
   m_Name: SM_Chr_Attach_Hat_Bunny_01
   m_TagString: Untagged
@@ -83,17 +82,3 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1853224248472396}
   m_Mesh: {fileID: 4300000, guid: d3176bc2153ccb24b8585744a6267574, type: 3}
---- !u!64 &64214277578505742
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1853224248472396}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 43229933079149170, guid: c12abb0ab9f82f44a8fd008cff37d215, type: 2}

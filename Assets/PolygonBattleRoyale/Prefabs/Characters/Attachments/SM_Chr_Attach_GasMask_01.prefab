@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4174647770949842}
   - component: {fileID: 33081695349551814}
   - component: {fileID: 23900150991590736}
-  - component: {fileID: 64787997731017938}
   m_Layer: 0
   m_Name: SM_Chr_Attach_GasMask_01
   m_TagString: Untagged
@@ -83,17 +82,3 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1763366611001454}
   m_Mesh: {fileID: 4300000, guid: b2661c706fe5385429fea0535986fa75, type: 3}
---- !u!64 &64787997731017938
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1763366611001454}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 43208855295532392, guid: 018149c816cee8e45a75cd43a977bb49, type: 2}

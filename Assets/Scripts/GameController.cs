@@ -14,8 +14,9 @@ public class GameController : Singleton<GameController> {
 	[SerializeField] private float accelerationRate = 0.4f;
 	[SerializeField] private bool upgradableSpeedPlayer = true;
 
-	[SerializeField] private Vector3  sizeClearObstacles = new Vector3(3f,2f,2f);
+	[SerializeField] private Vector3  sizeClearObstacles = new Vector3(3f, 2f, 5f);
 	[SerializeField] private LayerMask obstacles;
+	[SerializeField] protected float maxDistanceRay = 20;
 
 	private Player.PlayerManager player;
 
@@ -47,9 +48,13 @@ public class GameController : Singleton<GameController> {
 
 	public virtual void ClearHindrance(){
 		RaycastHit[] hits;
-		hits = Physics.BoxCastAll(player.transform.position,sizeClearObstacles, Vector3.forward, Quaternion.identity, 0,obstacles);
+		Vector3 positionBox = player.transform.position;
+		positionBox.z += sizeClearObstacles.z;
+
+		hits = Physics.BoxCastAll(player.transform.position,sizeClearObstacles, player.transform.forward, Quaternion.identity, maxDistanceRay, obstacles);
 		foreach (RaycastHit hit in hits) {
 			hit.transform.gameObject.SetActive (false);
+			Debug.Log (hit.transform.name);
 		}
 		CameraFlash.instance.Flash(1f);
 	}
@@ -63,9 +68,12 @@ public class GameController : Singleton<GameController> {
 
 //	void OnDrawGizmos()
 //	{
-//		Gizmos.color = Color.red;
-//		Gizmos.DrawRay(player.transform.position,Vector3.forward * 1);
-//		Gizmos.DrawWireCube(player.transform.position + Vector3.forward * 0, sizeClearObstacles*2f);
+//		Vector3 positionBox = player.transform.position;
+//		positionBox.z += sizeClearObstacles.z;
+	//		Gizmos.DrawRay(positionBox, player.transform.forward * maxDistanceRay);
+//			//Draw a cube at the maximum distance
+	//		Gizmos.DrawWireCube(positionBox + player.transform.forward * maxDistanceRay, sizeClearObstacles*2);
+//
 //	}
 
 

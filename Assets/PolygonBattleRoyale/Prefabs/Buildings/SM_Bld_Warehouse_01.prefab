@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4059552754189500}
   - component: {fileID: 33847150911065094}
   - component: {fileID: 23285363116097530}
-  - component: {fileID: 64283820712215210}
   m_Layer: 0
   m_Name: SM_Bld_Warehouse_01
   m_TagString: Untagged
@@ -83,17 +82,3 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1771269981955728}
   m_Mesh: {fileID: 4300000, guid: 4be346e3f7710eb43a6c627c8d07903f, type: 3}
---- !u!64 &64283820712215210
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1771269981955728}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: 2c9a0532593445e42aa507fc8ec86185, type: 3}

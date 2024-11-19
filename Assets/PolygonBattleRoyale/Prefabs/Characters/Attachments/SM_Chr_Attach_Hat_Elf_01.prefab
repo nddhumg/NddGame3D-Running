@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4491548091231068}
   - component: {fileID: 33138701161672484}
   - component: {fileID: 23966991406986072}
-  - component: {fileID: 64018770547198204}
   m_Layer: 0
   m_Name: SM_Chr_Attach_Hat_Elf_01
   m_TagString: Untagged
@@ -83,17 +82,3 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1228612885914040}
   m_Mesh: {fileID: 4300000, guid: 337fc3a9230648e49930044a2eea2a08, type: 3}
---- !u!64 &64018770547198204
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1228612885914040}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 43297852827337578, guid: 90877e33c00bab34db2f0695bd046768, type: 2}

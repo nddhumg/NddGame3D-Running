@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4731247036866326}
   - component: {fileID: 33243253854710598}
   - component: {fileID: 23017128114237040}
-  - component: {fileID: 64061715029836466}
   m_Layer: 0
   m_Name: SM_Chr_Attach_Hat_Knight_01
   m_TagString: Untagged
@@ -83,17 +82,3 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1560339031157608}
   m_Mesh: {fileID: 4300000, guid: fe2097a8ccd47e9438f81fbd04329506, type: 3}
---- !u!64 &64061715029836466
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1560339031157608}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 43184638620551028, guid: 03cd2d8768275c548b1c6bd699beecf8, type: 2}

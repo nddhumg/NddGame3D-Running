@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4708731617616448}
   - component: {fileID: 33969915934512390}
   - component: {fileID: 23291050343579420}
-  - component: {fileID: 64056957499820646}
   m_Layer: 0
   m_Name: SM_Chr_Attach_Hat_Squid_01
   m_TagString: Untagged
@@ -83,17 +82,3 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1808829136793856}
   m_Mesh: {fileID: 4300000, guid: 9c653cb21a833f44ead8d0a6285abe4c, type: 3}
---- !u!64 &64056957499820646
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1808829136793856}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 43142049963838178, guid: d15c8f4d0eb1fe748a1b84bbb8736537, type: 2}

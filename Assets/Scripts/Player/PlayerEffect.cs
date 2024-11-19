@@ -68,8 +68,7 @@ namespace Player{
 		public virtual void Save(ref UpgradeData data){
 			data.names.Clear ();
 			data.levels.Clear ();
-			data.names.AddRange(upgrade.GetNamesEffect());
-			data.levels.AddRange (upgrade.GetLevelsEffect());
+			upgrade.GetEffect (ref data.names, ref data.levels);
 		}
 
 		public virtual void Load(UpgradeData data){

@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4136520543122868}
   - component: {fileID: 33784828054917410}
   - component: {fileID: 23865848976787688}
-  - component: {fileID: 64988250624200640}
   m_Layer: 0
   m_Name: SM_Chr_Attach_Hat_Racoon_01
   m_TagString: Untagged
@@ -83,17 +82,3 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1553822407466238}
   m_Mesh: {fileID: 4300000, guid: 4d27f21e52f1e4740a34d897021853ac, type: 3}
---- !u!64 &64988250624200640
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1553822407466238}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 43914110591329822, guid: 932b1d5cb06295e4cb757fdd1b7d44a4, type: 2}

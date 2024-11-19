@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4633928734274070}
   - component: {fileID: 33764477225803614}
   - component: {fileID: 23445630090964536}
-  - component: {fileID: 64243075880098546}
   m_Layer: 0
   m_Name: SM_Chr_Attach_Pouch_07
   m_TagString: Untagged
@@ -83,17 +82,3 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1063181261349706}
   m_Mesh: {fileID: 4300000, guid: e0e89e81ac7dbb94a94521447908041d, type: 3}
---- !u!64 &64243075880098546
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1063181261349706}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 43691551551736260, guid: a1608e1a71ff35c48ad93f1b8b1aaf72, type: 2}

@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4933336040765698}
   - component: {fileID: 33193599403309084}
   - component: {fileID: 23170749949261098}
-  - component: {fileID: 64492534189049806}
   m_Layer: 0
   m_Name: SM_Chr_Attach_Hat_Roman_01
   m_TagString: Untagged
@@ -83,17 +82,3 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1955487103038586}
   m_Mesh: {fileID: 4300000, guid: 500e69b6dd161754caa345468d4df35f, type: 3}
---- !u!64 &64492534189049806
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1955487103038586}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 43421697435783394, guid: 2c082b12dd3bb6843a7e29ee3e30e7c6, type: 2}

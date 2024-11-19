@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4075511670602576}
   - component: {fileID: 33862760974230474}
   - component: {fileID: 23977690333640826}
-  - component: {fileID: 64474382440327326}
   m_Layer: 0
   m_Name: SM_Chr_Attach_Hat_Football_01
   m_TagString: Untagged
@@ -83,17 +82,3 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1267928347703580}
   m_Mesh: {fileID: 4300000, guid: d7fb5d0e84d68b04ab161d395ed967f2, type: 3}
---- !u!64 &64474382440327326
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1267928347703580}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 43485276710271432, guid: 5dcc1050bf570e54780fba1148e46a16, type: 2}

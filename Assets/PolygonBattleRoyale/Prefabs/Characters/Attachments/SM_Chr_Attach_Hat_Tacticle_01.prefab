@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4694385703771052}
   - component: {fileID: 33184599969348172}
   - component: {fileID: 23082586885797260}
-  - component: {fileID: 64421458561658830}
   m_Layer: 0
   m_Name: SM_Chr_Attach_Hat_Tacticle_01
   m_TagString: Untagged
@@ -83,17 +82,3 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1500077853164510}
   m_Mesh: {fileID: 4300000, guid: 9791e0bc787af4246930451ad26fdc37, type: 3}
---- !u!64 &64421458561658830
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1500077853164510}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 43538849038464118, guid: d2b6bbd6ca9df9a468420167e86e19e2, type: 2}

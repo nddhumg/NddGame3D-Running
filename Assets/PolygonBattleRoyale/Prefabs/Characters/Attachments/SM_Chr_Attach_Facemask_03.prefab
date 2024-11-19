@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4307532116606018}
   - component: {fileID: 33772600789541998}
   - component: {fileID: 23097382798235460}
-  - component: {fileID: 64029408831547212}
   m_Layer: 0
   m_Name: SM_Chr_Attach_Facemask_03
   m_TagString: Untagged
@@ -83,17 +82,3 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1815976298393174}
   m_Mesh: {fileID: 4300000, guid: a07899f1d5f18554e80e600b7301781b, type: 3}
---- !u!64 &64029408831547212
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1815976298393174}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 43330889168260096, guid: 906e0f1e56118bf4aa093326f1fc7ee2, type: 2}
